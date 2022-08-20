@@ -23,12 +23,8 @@ export class AppComponent implements OnInit {
     //if (this.signupForm.value.username) {
       console.log(this.signupForm.value.username.length)
     //}
-    //if (this.signupForm.value.email) {
       console.log(this.signupForm.value.email.length)
-    //}
 
-    //if (this.signupForm.value.email) {
       console.log(this.signupForm.value.email.length)
-    //}
   }
 }
