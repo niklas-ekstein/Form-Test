@@ -1,0 +1,21 @@
+<!-- Say {{message}}
+<button (click)="sendMessage()" class="button"></button>
+<mat-slide-toggle>Slide me!</mat-slide-toggle> -->
+<mat-slide-toggle
+     [class.disabled]="isDisabled"
+     [class.active]="isChecked"
+     [class.inactive]="!isChecked" 
+     (click)="toggle()">
+    </mat-slide-toggle>
+<!-- <input type="checkbox" [checked]="isChecked" [disabled]="isDisabled" /> -->
+<div class="slide-toggle"
+     [class.disabled]="isDisabled"
+     [class.active]="isChecked"
+     [class.inactive]="!isChecked" 
+     (click)="toggle()">
+    <span class="positive-text" [hidden]="!isChecked">{{ checkedLabelText | uppercase }}</span>
+    <span class="negative-text" [hidden]="isChecked">{{ uncheckedLabelText | uppercase }}</span>
+    <span class="slide-toggle-button" 
+          [class.active]="isChecked"
+          [class.inactive]="!isChecked"></span>
+</div>
