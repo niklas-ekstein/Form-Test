@@ -49,8 +49,6 @@ export class ToggleComponent implements ControlValueAccessor {
     this.messageEvent.emit(this.message)
     console.log("hej 2")
 
-
-    
     console.log(this.isChecked)
 
     if (!this.isDisabled) {

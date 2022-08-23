@@ -10,11 +10,21 @@
 *ngIf="!myReactiveForm.get('name').valid && myReactiveForm.get('name').touched"
 class="help-block">Enter valid name</span>
 <br>
+
 <label class="form-label" for="email">Email: </label>
 <input class="form-control" formControlName="email" type="text">
 <span
 *ngIf="!myReactiveForm.get('email').valid && myReactiveForm.get('email').touched"
 class="help-block">Enter valid email</span>
+<br>
+
+<label class="form-label" for="phone">Phone:</label>
+<input class="form-control" formControlName="phone" type="text">
+<span
+*ngIf="!myReactiveForm.get('phone').valid && myReactiveForm.get('phone').touched"
+class="help-block">Enter valid phone</span>
+<br>
+
 <h5 class="mt-3">Family</h5>
 <button (click)="addMember()" class="btn btn-success" type="button">Add Family Member</button>
 &nbsp;&nbsp;
@@ -38,7 +48,7 @@ class="help-block">Enter valid email</span>
 </form>
 
 <!-- display content -->
-<div *ngIf="isSubmitted" class="p-3">
+<!-- <div *ngIf="isSubmitted" class="p-3">
 <h5>Form Data</h5>
 <p>Name: {{formData.name}}</p>
 <p>Mobile Number: {{formData.mbno}}</p>
@@ -48,7 +58,7 @@ class="help-block">Enter valid email</span>
   <p>Name: {{elem.rname}}</p>
   <p>Relation: {{elem.relation}}</p>
 </ng-container>
-</div>
+</div> -->
 
 </div>
 
@@ -80,40 +90,10 @@ class="help-block">Enter valid email</span>
       <h2>Angular Material</h2>
       <p>User Form</p>
     </title>
-    <!-- <p>
-      <mat-toolbar>
-        <span>Angular Material | User Form</span>
-      </mat-toolbar>
-    </p> -->
     
     <div class="clearfix">
       <div class="box" style="background-color:rgb(255, 255, 255);position: relative;left: 5%;">
         
-          <!-- <p>
-            <mat-form-field apparence="legacy">
-              <mat-label>Name</mat-label>
-              <input style="color: black;" matInput [(ngModel)]="newUser.userName" type="text" name="newuserName" id="newuserName" class="form-control" required>
-            </mat-form-field><br>
-          
-            <mat-form-field apparence="legacy">
-              <mat-label>Email</mat-label>
-              <input style="color: black;" matInput [(ngModel)]="newUser.email" type="text" name="email" id="email" class="form-control" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required>
-            </mat-form-field><br>
-          
-            <mat-form-field apparence="legacy">
-              <mat-label>Phone</mat-label>
-              <input style="color: black;" matInput [(ngModel)]="newUser.phone" type="text" name="phone" id="phone" class="form-control" required>
-            </mat-form-field><br>
-          
-            <mat-form-field apparence="legacy">
-              <mat-label>Amount</mat-label>
-              <input style="color: black;" matInput [(ngModel)]="newUser.amount" type="text" name="amount" id="amount" class="form-control"required>
-            </mat-form-field><br>
-            
-          </p> -->
-          <p>
-            <!-- <button mat-raised-button color="primary" (click)="addUser()">submit</button> -->
-          </p>
         
       </div>
       <div class="box" style="position: relative;left: 5%;">
@@ -136,7 +116,7 @@ class="help-block">Enter valid email</span>
             <mat-cell *matCellDef="let user"><div> {{user.phone}} </div></mat-cell>
           </ng-container>
           <ng-container matColumnDef="amount">
-            <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>Family size</mat-header-cell>
             <mat-cell *matCellDef="let user"><div> {{user.amount}} </div></mat-cell>
           </ng-container>
           <ng-container matColumnDef="actions">

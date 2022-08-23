@@ -22,11 +22,14 @@ export class AppComponent implements OnInit {
   signupForm: FormGroup;
   message: string = "App component, from toggle event "
 
+  name: string="";
   isSubmitted:boolean = false;
   count=0; // using for formArray elements
   formData = {
     name: '',
     email: '',
+    phone: '',
+    amount: 0,
     family: [
       {
         rname: '',
@@ -34,15 +37,6 @@ export class AppComponent implements OnInit {
       }
     ]
   }
-  
-  // ngOnInit() {
-  //   this.signupForm = new FormGroup({
-  //     'userData': new FormGroup({
-  //     'username' : new FormControl<string|null>(null, Validators.required),
-  //     'email' : new FormControl<string|null>(null, [Validators.required, Validators.email]),
-  //   })
-  //   })
-  // }
 
   constructor(private _fb: FormBuilder, public dialog: MatDialog) {
     this.myDataArray = new MatTableDataSource<user>([...this.USER_DATA]);
@@ -54,6 +48,8 @@ export class AppComponent implements OnInit {
   myReactiveForm = this._fb.group({
        'name' : new FormControl<string|null>(null, Validators.required),
        'email' : new FormControl<string|null>(null, [Validators.required, Validators.email]),
+       'phone' : new FormControl<string|null>(null, Validators.required),
+       'amount' : new FormControl<number|null>(1),
     family: this._fb.array([])
   })
   
@@ -87,32 +83,31 @@ export class AppComponent implements OnInit {
   }
 
   onSubmit(form:FormGroup){
-    this.addUser(form)
+    
     
     this.isSubmitted = true;
     this.formData.name = form.value.name;
     this.formData.email = form.value.relation;
+
     for(let i = 0; i < this.count; i++){
       this.formData.family[i].rname = form.value.family.rname;
       this.formData.family[i].relation = form.value.family.relation;
+      form.value.amount = i+2;
     }
+
+    this.addUser(form)
   }
 
   receiveMessage($event) {
     this.message = $event
   }
 
-
-
-
-
-  name: string="";
   
   columnsToDisplay: string[] = ["userName", "email", "phone","amount","actions"];
   public USER_DATA: user[] = [
-    { userName: "W1", email: "E1@gmail.com" ,phone:777777777, amount:1000},
-    { userName: "W2", email: "E2@gmail.com" ,phone:888888888, amount:2000},
-    { userName: "W3", email: "e3@gmail.com" ,phone:999999999, amount:11000}
+    { userName: "Niklas Ekstein", email: "niklas@gmail.com" ,phone:777777777, amount:4},
+    { userName: "Frank Lampard", email: "frank@chelsea.com" ,phone:888888888, amount:5},
+    { userName: "Steven Gerrard", email: "stevie@liverpool.com" ,phone:999999999, amount:3}
   ];
   public newUser = {userName: "ABC", email: "abc@gmail.com", phone:666666666, amount:21000};
   public myDataArray: any;
@@ -121,6 +116,9 @@ export class AppComponent implements OnInit {
   addUser(form:FormGroup) {
     if(this.newUser.userName!=""&&this.newUser.email!=""&&this.newUser.phone!=0&&this.newUser.amount!=0){
       this.newUser.userName=form.value.name;
+      this.newUser.email=form.value.email;
+      this.newUser.phone=form.value.phone;
+      this.newUser.amount=form.value.amount;
 
       
 
@@ -128,10 +126,8 @@ export class AppComponent implements OnInit {
       newUsersArray.push(this.newUser);
       this.myDataArray = [...newUsersArray];
       this.newUser = {userName:"User name", email: "abc@gmail.com", phone:0, amount:0};
-    //console.warn(this.myDataArray);
     }else{
       Swal.fire(':-|', 'Invalid input values..!', 'error')
-      //Swal.fire('Invalid input values..!')
     }
     
   }
@@ -141,7 +137,7 @@ export class AppComponent implements OnInit {
       return value.email != row_obj.email;
     });
     this.myDataArray = [...this.USER_DATA];//refresh the dataSource
-    Swal.fire('Deleted successfully..!')
+    Swal.fire('Deleted successfully!')
   }
 
   openDialog(row_obj:any): void {
